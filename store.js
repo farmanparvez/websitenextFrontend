@@ -8,6 +8,7 @@ const makeStore = () =>
       [authSlice.name]: authSlice.reducer,
     },
     devTools: true,
+    
   });
 
 
