@@ -1,10 +1,9 @@
-import { selectAuthState, setAuthState } from "../redux/slice/slice";
+import { setAuthState } from "../redux/slice/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { wrapper } from "../store";
 
 const Home = (props) => {
-  console.log(props);
-  const authState = useSelector(selectAuthState);
+  const { authState } = useSelector(state => state.authSlice);
   // console.log(authState);
   const dispatch = useDispatch();
   return (
@@ -28,14 +27,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
     async ({ params }) => {
       // we can set the initial state from here
       // we are setting to false but you can run your custom logic here
-      const res = await store.dispatch(setAuthState(false)); 
-      console.log("res: ",res);
-      console.log("State on server", store.getState());
-      return {
-        props: {
-          authState: false,
-        },
-      };
+      const res = await store.dispatch(setAuthState(true));
+      // console.log("res: ", res);
+      // console.log("State on server", store.getState());
+      // return {
+      //   props: {
+      //     authState: res,
+      //   },
+      // };
     }
 );
 

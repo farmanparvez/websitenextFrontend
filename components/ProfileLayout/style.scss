@@ -1,0 +1,14 @@
+
+
+.ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #FAD02C !important;
+}
+
+.sidebar-cs{
+    background: #fff !important;
+    @media screen and (max-width: 991px) {
+        position: absolute !important;
+        z-index: 1 !important;
+        min-height: 100% !important;
+    }
+}

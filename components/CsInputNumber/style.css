@@ -1,0 +1,9 @@
+.csInput {
+  min-width: 40px;
+  min-height: 40px;
+  background: blue;
+}
+.csInput ::placeholder {
+  color: #f8f8f8 !important;
+  opacity: 0.8 !important;
+}

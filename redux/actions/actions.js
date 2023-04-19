@@ -1,35 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { HYDRATE } from "next-redux-wrapper";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { loginAPI } from "../../service/authAPI"
 
-// Initial state
-const initialState = {
-    authState: false,
-};
+export const login = createAsyncThunk("auth/login", async (data, thunkApi) => {
+    try {
+        const res = await loginAPI(data)
 
-// Actual Slice
-export const authSlice = createSlice({
-    name: "auth",
-    initialState,
-    reducers: {
-        // Action to set the authentication status
-        setAuthState(state, action) {
-            state.authState = action.payload;
-        },
-    },
+        console.log(res)
+        return res
+    } catch (error) {
 
-    // Special reducer for hydrating the state. Special case for next-redux-wrapper
-    extraReducers: {
-        [HYDRATE]: (state, action) => {
-            return {
-                ...state,
-                ...action.payload.auth,
-            };
-        },
-    },
-});
-
-export const { setAuthState } = authSlice.actions;
-
-export const selectAuthState = (state) => state.auth.authState;
-
-export default authSlice.reducer;
+    }
+})
