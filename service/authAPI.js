@@ -1,4 +1,10 @@
-import { request } from "../utils/request"
-const baseUrl = "https://website-backend-git-dev-farmanparvez.vercel.app/"
+import { requests } from "../utils/request"
 
-export const loginAPI = async (data) => await request({ method: 'post', url: `${baseUrl}/api/signin`, data })
+export const loginAPI = async (data) => {
+    return requests({
+    method: 'POST', url: `api/signin`, headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }, body: data
+}
+)}

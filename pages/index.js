@@ -4,7 +4,7 @@ import { wrapper } from "../store";
 
 const Home = (props) => {
   const { authState } = useSelector(state => state.authSlice);
-  // console.log(authState);
+  console.log(authState);
   const dispatch = useDispatch();
   return (
     <div>

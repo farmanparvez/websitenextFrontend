@@ -2,10 +2,15 @@ import { Input, Form } from "antd";
 import { CsButton } from "../../components";
 // import Google from "../../assets/google.svg";
 // import facebook from "../../assets/facebook.svg";
+import { login } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignIn = () => {
+  const dispatch = useDispatch()
+  const { isLoading } = useSelector(state => state.authSlice)
   const onFinish = (values) => {
-
+    console.log(values)
+    dispatch(login(values));
   };
 
   return (
@@ -87,6 +92,7 @@ const SignIn = () => {
                     className="w-full text-center flex justify-center h-10"
                     type="pr"
                     htmlType="submit"
+                    loading={isLoading}
                   >
                     <span className="text-[14] font-semibold text-black">
                       Sign In

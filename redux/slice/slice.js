@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-// import { login } from "../actions/actions"
+import { login } from "../actions/actions"
 // Initial state
 const initialState = {
     isLoading: false,
@@ -19,7 +19,6 @@ export const authSlice = createSlice({
             state.authState = action.payload;
         },
     },
-
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     // extraReducers: (builder) => {
     //     // Add reducers for additional action types here, and handle loading state as needed
@@ -35,23 +34,49 @@ export const authSlice = createSlice({
     //             state.isError = true
     //         })
     // },
+    extraReducers: (builder) => {
+        builder
+            .addCase(login.pending, (state, action) => {
+                state.isLoading = true
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.isLoading = false
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.isLoading = false
+            })
+            // .addCase(HYDRATE, (state, action) => {
+            //     state.authState = action.payload.authSlice.authState
+            // })
+    }
+
     // extraReducers: (builder) => {
-    //     // Add reducers for additional action types here, and handle loading state as needed
     //     builder
+    //         .addCase(login.pending, (state) => {
+    //             state.isLoading = true
+    //         })
+    //         .addCase(login.fulfilled, (state, { payload }) => {
+    //             When the API call is successful and we get some data,the data becomes the `fulfilled` action payload
+    //             state.isLoading = false
+    //             state.data = payload;
+    //         })
+    //         .addCase(login.rejected, (state) => {
+    //             state.isLoading = false
+    //         })
     //         .addCase(HYDRATE, (state, action) => {
-    //             return {
-    //                 ...state,
-    //                 ...action.payload.auth,
-    //             };
+    //             state.authState = action.payload.authSlice.authState
     //         })
     // },
-    // extraReducers: {
 
+    // extraReducers: {
     //     [HYDRATE]: (state, action) => {
-    //         return {
-    //             ...state,
-    //             ...action.payload.auth,
-    //         };
+    //         console.log(state)
+    //         console.log(action)
+    //         state.authState = action.payload.authSlice.authState
+    //         // return {
+    //         //     ...state, authState: action.payload.authSlice.authState,
+    //         // };
     //     },
     // },
 });
