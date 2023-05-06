@@ -11,8 +11,8 @@ export const login = createAsyncThunk("auth/login", async (data, thunkApi) => {
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
         }
         // const res = await loginAPI(data)
-        // const res = await axios.post(`${baseUrl}/api/signin`, data, { headers })
-        const res = await axios.get(`${baseUrl}`, { headers })
+        const res = await axios.post(`${baseUrl}/api/signin`, data, { headers })
+        // const res = await axios.get(`${baseUrl}`, { headers })
         console.log(res)
         return res
     } catch (error) {
